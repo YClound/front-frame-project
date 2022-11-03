@@ -1,0 +1,14 @@
+.DS_Store
+.tea/
+.idea/
+.mini-ide/
+dev/
+node_modules/
+.miniu/
+miniu_dist/
+/*/node_modules/
+/*/dev/
+/*/dist/
+/*/base/
+.yarn-error.log
+
