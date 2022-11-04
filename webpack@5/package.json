@@ -7,7 +7,7 @@
   "scripts": {
     "watch": "webpack --config config/dev.js --watch",
     "dynamic": "webpack serve --config config/base/dynamicDev.js",
-    "dev": "webpack serve --config config/base/dev.js",
+    "dev": "webpack serve --config config/base/dev.js --env ENV=dev",
     "build": "webpack --config config/base/dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
