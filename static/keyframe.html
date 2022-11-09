@@ -57,11 +57,39 @@
         transform: translateX(-300px);
       }
     }
+
+    #demoDisplay {
+      display: flex;
+      width: 160px;
+      height: 160px;
+      margin: 200px 0 0 50px;
+      padding: 10px;
+      border: 5px dotted black;
+      border-radius: 25px;
+    }
+
+    #demoContainer {
+      display: flex;
+      flex-shrink: 0;
+      border-radius: 25px;
+      padding: 5px;
+    }
+
+    #demoContainer .item {
+      width: 150px;
+      height: 150px;
+      text-align: center;
+      line-height: 150px;
+      font-size: 35px;
+      border-radius: 25px;
+      margin: 0 30px 30px 0;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 
 <body>
-  <div style="display: flex; align-items: center; height: 50px; font-size: 30px; padding: 100px 0 0 100px;">
+  <div style="display: flex; align-items: center; height: 50px; font-size: 20px; padding: 100px 0 0 50px;">
     <input type="checkbox" style="width: 50px; height: 50px;" id="horizontal" checked="true" onchange="refresh()"> 横向排列
     <input type="checkbox" style="width: 50px; height: 50px; margin-left: 50px;" id="overflow-hidden" checked="true"
       onchange="refresh()"> 超出隐藏
@@ -74,14 +102,6 @@
   <div id="demoDisplay">
     <div id="demoContainer"></div>
   </div>
-  <!-- <div class="keyframe-container">
-    <div class="keyframe-content">
-      <div class="keyframe-content-item" style="background-color: #ff614c;">1</div>
-      <div class="keyframe-content-item" style="background-color: #bfdc36;">2</div>
-      <div class="keyframe-content-item" style="background-color: #6e80e6;">3</div>
-      <div class="keyframe-content-item" style="background-color: #ff614c;">1</div>
-    </div>
-  </div> -->
 
   <script>
     const palette = ['#863d91', '#f29900', '#f2de5c', '#f7e9d0', '#b893b6'];
@@ -109,10 +129,9 @@
 
     plus();
 
-
     function plus(isHorizontal, isOverflowHidden) {
       count++;
-      document.getElementById('plusButton').textContent = `展位数(${count}) +1`;
+      document.getElementById('plusButton').textContent = `展位数(${count})`;
 
       appendItem2Container(isHorizontal);
 
@@ -120,7 +139,29 @@
     }
 
     function refresh() {
+      const isHorizontal = document.getElementById('horizontal').checked;
+      const isOverflowHidden = document.getElementById('overflow-hidden').checked;
 
+      let cssInfo = null;
+
+      if (count > 1) {
+        cssInfo = buildKeyFramesAndReturnCSSInfo(isHorizontal, count, step, blankStep, scrollTime, displayTime);
+
+        if (cssInfo) {
+          appendAnimStyle2DOM(cssInfo.cssStr);
+        }
+      }
+
+      document.getElementById('demoDisplay').style = `flex-direction: ${isHorizontal ? 'row' : 'column'};overflow: ${isOverflowHidden ? 'hidden' : 'visible'};`
+
+      const demoContainer = document.getElementById('demoContainer');
+      const itemTitleElementList = demoContainer.getElementsByClassName('item');
+      for (let index = 0; index < itemTitleElementList.length; index++) {
+        const element = itemTitleElementList[index];
+        element.style = `background-color: ${getPaletteColor(index % count)};`
+        element.textContent = (index % count + 1) + '/' + count;
+      }
+      demoContainer.style = `flex-direction: ${isHorizontal ? 'row' : 'column'};overflow: ${isOverflowHidden ? 'hidden' : 'visible'};${cssInfo ? `animation: ${ANIM_NAME} ${cssInfo.animDuration}s linear infinite` : ''}`
     }
 
 
@@ -137,6 +178,45 @@
       } else {
         demoContainer.insertBefore(newItem, demoContainer.lastChild);
       }
+    }
+
+    function buildKeyFramesAndReturnCSSInfo(isHorizontal, count, step, blankStep, scrollTime, displayTime) {
+      const translate = isHorizontal ? 'translateX' : 'translateY';
+      const totalTime = displayTime * count + scrollTime * count;
+
+      let sumPercentage = 0;
+      let sumOffset = 0;
+      let cssStr = `@keyframes ${ANIM_NAME} {0%{transform:${translate}(0px);}`
+
+      for (let index = 0; index < count; index++) {
+        sumPercentage += (displayTime / totalTime);
+        cssStr += `${(sumPercentage * 100).toFixed(0)}%{transform:${translate}(-${sumOffset.toFixed(2)}px);}`;
+
+        sumPercentage += (scrollTime / totalTime);
+        sumOffset += step + blankStep;
+        cssStr += `${(sumPercentage * 100).toFixed(0)}%{transform:${translate}(-${sumOffset.toFixed(2)}px);}`;
+      }
+
+      cssStr += '}';
+
+      return {
+        animDuration: totalTime,
+        cssStr,
+      }
+    }
+
+    function appendAnimStyle2DOM(cssStr) {
+      const head = document.head || document.getElementsByTagName('head')[0];
+      const style = document.createElement('style');
+      style.type = 'text/css';
+
+      if (style.styleSheet) {
+        style.styleSheet.cssText = cssStr;
+      } else {
+        style.appendChild(document.createTextNode(cssStr));
+      }
+
+      head.appendChild(style);
     }
   </script>
 </body>
