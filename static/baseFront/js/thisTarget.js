@@ -112,7 +112,7 @@ var displayBindings = function () {
   var obj1 = {
     display: 1,
     foo: function (b) {
-      b = b || this.display 
+      b = b || this.display
       return function (c) {
         console.log('this.display + b + c:', this.display + b + c)
       }
@@ -124,7 +124,47 @@ var displayBindings = function () {
 }
 
 
+var newName = 'window';
+var newBindings = function () {
 
+  function Person(name) {
+    this.newName = name;
+    this.foo1 = function () {
+      console.log('Person this.foo1', this.newName)
+    }
+
+    this.foo2 = function () {
+      console.log('Person this.foo2', this.newName)
+
+      return function () {
+        console.log('Person this.foo2 return', this.newName)
+      }
+    }
+  }
+
+  var person2 = {
+    newName: 'person2',
+    foo: function () {
+      console.log('person2 this.foo', this.newName)
+
+      return function () {
+        console.log('person2 this.foo return', this.newName)
+      }
+    }
+  }
+
+  var person1 = new Person('gyn');
+  var person3 = new Person('person2')
+  person1.foo1();
+  person1.foo2()();
+  console.log('-----------------')
+  person2.foo()();
+  console.log('-----------------')
+  person1.foo2.call(person3)() // person2
+  person1.foo2().call(person3)
+}
+
+var arrowName = 'window';
 var arrowBindings = function () {
   console.warn('------箭头函数绑定--------')
   // 这道题非常经典，它证明了箭头函数内的this是由外层作用域决定的
@@ -151,35 +191,30 @@ var arrowBindings = function () {
   obj.foo();
   obj.foo1()();
   obj.foo2()();
+  console.warn('---------------');
 
-}
-
-
-var newName = 'window';
-var newBindings = function () {
-  function Person(name) {
-    this.newName = name;
-    this.foo1 = function() {
-      console.log(this.newName)
-    }
-
-    this.foo2 = function() {
-      console.log(this.newName)
-      
-      return function() {
-        console.log(this.newName)
+  var obj1 = {
+    arrowName: 'obj1',
+    foo1: () => {
+      console.log(this.arrowName)
+    },
+    foo2: function () {
+      console.log(this.arrowName)
+      return () => {
+        console.log(this.arrowName)
       }
     }
   }
-
-  var person1 = new Person('gyn');
-  console.log(person1.newName)
-  person1.foo1();
-  person1.foo2()();
+  
+  obj1.foo1()
+  obj1.foo2()()
 }
+
+
+
 
 // defaultBindings(); // 默认绑定
 // implicitBindings(); // 隐式绑定
 // displayBindings(); // 显示绑定
-// arrowBindings(); // 箭头函数绑定
-newBindings(); // 箭头函数绑定
+// newBindings(); // 箭头函数绑定
+arrowBindings(); // 箭头函数绑定
