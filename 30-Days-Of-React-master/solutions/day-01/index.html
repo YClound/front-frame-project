@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>day-01</title>
+</head>
+
+<body>
+  <script>
+    var emptyArray = new Array();
+    console.log('1.', emptyArray)
+
+    // var length5Array = new Array(10).fill(9);
+    var length5Array = Array.from({ length: 9 }, (v, i) => i);
+    var length5ArrayLength = length5Array.length
+    console.log('2.', length5Array, length5ArrayLength, length5Array[0], length5Array[length5ArrayLength - 1], length5Array[parseInt(length5ArrayLength / 2)]);
+
+    var stringArray = ['Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'];
+    console.log('6.', stringArray)
+    for (var i = 0; i < stringArray.length; i++) {
+      const ele = stringArray[i];
+      const firstEle = ele.slice(0, 1);
+      console.log(stringArray[i].toUpperCase())
+      console.log(firstEle.toLocaleUpperCase() + ele.slice(1))
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!-- https://segmentfault.com/a/1190000043388231 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>头像悬停效果</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      --s: 280px;
+      /* image size */
+      --b: 5px;
+      /* border thickness */
+      --c: #C02942;
+      /* border color */
+      --f: 1;
+      /* initial scale */
+
+      --_g: 50% / calc(100% / var(--f)) 100% no-repeat content-box;
+      --_o: calc((1 / var(--f) - 1) * var(--s) / 2 - var(--b));
+
+      width: var(--s);
+      aspect-ratio: 1;
+      padding-top: calc(var(--s)/5);
+      cursor: pointer;
+      border-radius: 0 0 999px 999px;
+      outline: var(--b) solid var(--c);
+      outline-offset: var(--_o);
+      background:
+        radial-gradient(circle closest-side,
+          #ECD078 calc(99% - var(--b)),
+          var(--c) calc(100% - var(--b)) 99%,
+          #0000) var(--_g);
+      -webkit-mask:
+        linear-gradient(#000 0 0) no-repeat 50% calc(-1 * var(--_o)) / calc(100% / var(--f) - 2 * var(--b)) 50%,
+        radial-gradient(circle closest-side,
+          #000 99%,
+          #0000) var(--_g);
+      transform: scale(var(--f));
+      transition: .5s;
+    }
+
+    img:hover {
+      --f: 1.35;
+      /* hover scale */
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./assets/avatar.png" alt="">
+</body>
+
+</html>

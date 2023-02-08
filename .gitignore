@@ -11,4 +11,5 @@ miniu_dist/
 /*/dist/
 /*/base/
 .yarn-error.log
+.vscode
 
