@@ -12,4 +12,5 @@ miniu_dist/
 /*/base/
 .yarn-error.log
 .vscode
+/node-porject/static
 
