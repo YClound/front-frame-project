@@ -17,7 +17,9 @@ router.post('/api/upload', upload.single('file'), async (ctx, next) => {
   console.log(ctx.request.file, ctx.request.body);
   ctx.body = {
     code: 0,
-    data: '成功',
+    data: {
+      message: '上传成功'
+    },
     success: true,
   }
 });

@@ -1,4 +1,5 @@
 import { post, get } from '@/public/request';
+import axios from 'axios';
 
 export const uploadApi = (params = {}) => {
   return post({
@@ -6,6 +7,16 @@ export const uploadApi = (params = {}) => {
     params,
     headers: {
       "content-type": "multipart/form-data"
+    }
+  })
+}
+
+export const mergedApi = (params = {}) => {
+  return post({
+    url: '/api/merge',
+    params,
+    headers: {
+      "content-type": "application/json"
     }
   })
 }
