@@ -1,3 +1,9 @@
+## 2023-03-29
+### 1. navigator.mediaDevices
+> 可以用来获取摄像头、麦克风、屏幕等。
+* getDisplayMedia-可以用来录制屏幕，截图;
+* getUserMedia-可以获取摄像头、麦克风的输入;
+
 ## 2018-11-19
 * 回文字符串：一个正读和反读都一样的字符串
 
@@ -162,7 +168,6 @@ test2();
 * javascript Parser（esprima、traceur、acorn、shift） - 将js源码转换成AST的解析器
 
 # babel - js编译器
-![image](https://user-gold-cdn.xitu.io/2020/4/25/171b20a139161ddd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 1. **「Parse(解析)」** 将源代码转换成更加抽象的表示方法（例如抽象语法树）
 1. **「Transform(转换)」** 对（抽象语法树）做一些特殊处理，让它符合编译器的期望
 1. **「Generate(代码生成)」** 将第二步经过转换过的（抽象语法树）生成新的代码

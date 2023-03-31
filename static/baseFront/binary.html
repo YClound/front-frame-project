@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    #grop-zone {
+      width: 500px;
+      height: 200px;
+      border: #ccc 1px dashed;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Blob -->
+  <iframe id="blobIframe"></iframe>
+
+  <!-- File -->
+  <input type="file" id="fileInput" multiple="multiple" />
+
+  <img id="preview" style="height: 150px;" alt="">
+  <div id="grop-zone"></div>
+
+
+  <script>
+    // Blob
+    const blob = new Blob(["hello World Blob"], { type: 'text/plain' });
+    console.log('blob.size: ', blob.size, ', blob.type: ', blob.type)
+
+    const blobIframe = document.getElementById('blobIframe');
+    const blobIframeContent = URL.createObjectURL(blob.slice(0, 5));
+    blobIframe.src = blobIframeContent;
+
+    const reader = new FileReader();
+    const preview = document.getElementById('preview');
+
+    // File FileReader
+    const fileInput = document.getElementById('fileInput');
+    fileInput.onchange = (e) => {
+      const files = e.target.files || [];
+      console.log(e, files)
+      // reader.readAsText(files[0]);
+      reader.readAsDataURL(files[0]);
+    }
+
+    const dropZone = document.getElementById('grop-zone');
+    dropZone.ondragover = (e) => {
+      e.preventDefault();
+    }
+
+    dropZone.ondrop = (e) => {
+      e.preventDefault();
+      const files = e.dataTransfer.files;
+      console.log(e, files)
+    }
+
+
+    reader.onprogress = (e) => {
+      const { loaded, total } = e;
+      console.log(e, loaded, total)
+      if (loaded && total) {
+        const percent = (event.loaded / event.total) * 100;
+        console.log(`上传进度: ${Math.round(percent)} %`);
+      }
+    }
+
+    reader.onload = (e) => {
+      const result = e.target.result;
+      preview.src = result;
+      console.log(result);
+    }
+
+    // ArrayBuffer
+
+  </script>
+</body>
+
+</html>

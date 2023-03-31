@@ -212,7 +212,6 @@ var arrowBindings = function () {
 
 
 
-
 // defaultBindings(); // 默认绑定
 // implicitBindings(); // 隐式绑定
 // displayBindings(); // 显示绑定
