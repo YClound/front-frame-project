@@ -18,6 +18,8 @@
 </head>
 
 <body>
+  <img src="./assets/blob.jpeg"/>
+  <img src="./assets/ArrayBuffer.jpeg"/>
   <!-- Blob -->
   <iframe id="blobIframe"></iframe>
 
@@ -47,6 +49,11 @@
       console.log(e, files)
       // reader.readAsText(files[0]);
       reader.readAsDataURL(files[0]);
+
+      // Object Url
+      const objUrl = URL.createObjectURL(files[0], 'download');
+      // URL.revokeObjectURL(objUrl);
+      console.log(objUrl);
     }
 
     const dropZone = document.getElementById('grop-zone');
@@ -77,6 +84,24 @@
     }
 
     // ArrayBuffer
+    const buffer = new ArrayBuffer(16);
+    console.log(buffer.byteLength, buffer.slice(0,8), ArrayBuffer.isView(buffer));
+
+    const bufferView = new Uint32Array(buffer);
+    console.log(ArrayBuffer.isView(bufferView))
+
+    let view = new Int8Array(16);
+    view[0] = 10;
+    view[10] = 6;
+    console.log(view, view.BYTES_PER_ELEMENT)
+
+    const dataView = new DataView(buffer)
+    console.log(dataView)
+
+
+    // Base64
+    const js = btoa('javascript');
+    console.log(js, atob(js))
 
   </script>
 </body>

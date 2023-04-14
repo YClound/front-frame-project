@@ -1,3 +1,4 @@
+<!-- https://zhuanlan.zhihu.com/p/568915443 -->
 # Blob
 > Blob 对象表示一个不可变、原始数据的类文件对象。它的数据可以按文本或二进制的格式进行读取，也可以转换成 ReadableStream 来用于数据操作。实际上，Blob 对象是包含有只读原始数据的类文件对象。简单来说，Blob 对象就是一个不可修改的二进制文件。
 1. new Blob(array, options); 
@@ -74,10 +75,104 @@ ArrayBuffer 对象用来表示通用的、固定长度的原始二进制数据�
 ArrayBuffer 本身就是一个黑盒，不能直接读写所存储的数据，需要借助以下视图对象来读写：
 
 * TypedArray：用来生成内存的视图，通过9个构造函数，可以生成9种数据格式的视图。
+  |元素	|类型化数组	|字节	|描述|
+  |---|---|---|---|
+  |Int8|Int8Array	|1|8|位有符号整数|
+  |Uint8|Uint8Array|1|8 |位无符号整数|
+  |Uint8C|Uint8ClampedArray|1|8|位无符号整数|
+  |Int16|Int16Array|2|16|位有符号整数|
+  |Uint16|Uint16Array|2|16|位无符号整数|
+  |Int32|Int32Array|4|32|位有符号整数|
+  |Uint32|Uint32Array|4|32|位无符号整数|
+  |Float32|Float32Array|4|32|位浮点|
+  |Float64|Float64Array|8|64|位浮点|
 * DataViews：用来生成内存的视图，可以自定义格式和字节序。
+  > new DataView(buffer [, byteOffset [, byteLength]])
+  * getInt8：读取1个字节，返回一个8位整数。
+  * getUint8：读取1个字节，返回一个无符号的8位整数。
+  * getInt16：读取2个字节，返回一个16位整数。
+  * getUint16：读取2个字节，返回一个无符号的16位整数。
+  * getInt32：读取4个字节，返回一个32位整数。
+  * getUint32：读取4个字节，返回一个无符号的32位整数。
+  * getFloat32：读取4个字节，返回一个32位浮点数。
+  * getFloat64：读取8个字节，返回一个64位浮点数。
 
+1. ArrayBuffer.prototype.byteLength
+  > 只读属性，表示 ArrayBuffer 的 byte 的大小
+1. ArrayBuffer.prototype.slice
+  > 来截取 ArrayBuffer 实例，它返回一个新的 ArrayBuffer
+1. ArrayBuffer.isView()
+  > 用来判断参数是否是 TypedArray 实例或者 DataView 实例
 
+# Object URL
+Object URL（MDN定义名称）又称Blob URL（W3C定义名称），是HTML5中的新标准。它是一个用来表示File Object 或Blob Object 的URL。
 
+对于 Blob/File 对象，可以使用 URL构造函数的 createObjectURL() 方法创建将给出的对象的 URL。这个 URL 对象表示指定的 File 对象或 Blob 对象。我们可以在img、script 标签中或者 a 和 link 标签的 href 属性中使用这个 URL。
+
+可以将Blob/File对象转化为URL，通过这个URL 就可以实现文件下载或者图片显示等。
+
+当我们使用createObjectURL()方法创建一个data URL 时，就需要使用revokeObjectURL()方法从内存中清除它来释放内存。虽然浏览器会在文档卸载时自动释放 Data URL，但为了提高性能，我们应该使用createObjectURL()来手动释放它。revokeObjectURL()方法接受一个Data URL 作为其参数，返回undefined
+
+# Base64
+* atob()：解码，解码一个 Base64 字符串；
+* btoa()：编码，从一个字符串或者二进制数据编码一个 Base64 字符串。
+
+# 格式转换
+1. ArrayBuffer → blob
+````
+const blob = new Blob([new Uint8Array(buffer, byteOffset, length)]);
+````
+1. ArrayBuffer → base64
+````
+const base64 = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
+````
+1. base64 → blob
+````
+const base64toBlob = (base64Data, contentType, sliceSize) => {
+  const byteCharacters = atob(base64Data);
+  const byteArrays = [];
+
+  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    const byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+
+  const blob = new Blob(byteArrays, {type: contentType});
+  return blob;
+}
+````
+4. blob → ArrayBuffer
+````
+function blobToArrayBuffer(blob) { 
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject;
+    reader.readAsArrayBuffer(blob);
+  });
+}
+````
+5. blob → base64
+````
+function blobToBase64(blob) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
+}
+````
+6. blob → Object URL
+````
+const objectUrl = URL.createObjectURL(blob);
+````
 
 
 
