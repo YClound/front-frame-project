@@ -14,5 +14,8 @@
 
 > mix-blend-mode: multiply
 
-content-visibility
-contain-intrinsic-size
+## 提升渲染性能
+* content-visibility
+* contain-intrinsic-size
+
+## gradient-渐变

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gradient-渐变</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+    }
+
+    .mb-8 {
+      margin-bottom: 8px;
+    }
+
+    .content {
+      width: 100%;
+      height: 100px;
+    }
+
+    .linear1 {
+      background: linear-gradient(to bottom, #30e8bf 50%, #ff8235 50%);
+      background-size: 50% 60px;
+    }
+
+    .linear2 {
+      height: 1px;
+      background: linear-gradient(to right, #ccc 50%, #fff 50%);
+      background-size: 12px 100%;
+    }
+
+    .linear3 {
+      background: linear-gradient(45deg, #30e8bf 50%, #ff8235 50%);
+      background-size: 50px 50px;
+    }
+
+    .linear4 {
+      height: 20px;
+      background: linear-gradient(45deg,
+          #30e8bf 25%,
+          #ff8235 0,
+          #ff8235 50%,
+          #30e8bf 0,
+          #30e8bf 75%,
+          #ff8235 0);
+      background-size: 30px 30px;
+      animation: roll 1s linear infinite;
+    }
+
+    @keyframes roll {
+      from {
+        background-position-x: 0;
+      }
+
+      to {
+        background-position-x: 30px;
+      }
+    }
+
+    .linear5 {
+      background-color: #eee;
+      background-image: linear-gradient(#ff8235 1px, transparent 0),
+        linear-gradient(90deg, #ff8235 1px, transparent 0),
+        linear-gradient(#ff8235 2px, transparent 0),
+        linear-gradient(90deg, #ff8235 2px, transparent 0);
+      background-size: 15px 15px, 15px 15px, 60px 60px, 60px 60px;
+    }
+
+    .linear6 {
+      height: 105px;
+      background-color: white;
+      background-image: linear-gradient(90deg, rgba(255, 0, 0, 0.5) 50%, transparent 0),
+        linear-gradient(rgba(255, 0, 0, 0.5) 50%, transparent 50%);
+      background-size: 30px 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>线性渐变-(linear-gradient)</h2>
+  <div class="content mb-8 linear1"></div>
+  <div class="mb-8 linear2"></div>
+  <div class="mb-8 content linear3"></div>
+  <div class="mb-8 linear4"></div>
+  <div class="mb-8 content linear5"></div>
+  <div class="mb-8 content linear6"></div>
+  <h2>径向渐变-(radial-gradient)</h2>
+  <h2>圆锥渐变-(conic-gradient)</h2>
+
+  <script>
+    // 拼接参数
+    const joinKeyValStr = (arr, sepChar = '&') => arr.map(({key, val}) => `${encodeURIComponent(key)}=${encodeURIComponent(val)}`).join(sepChar); // 可选过程，⽣成果园 scheme 
+    const orchardAppId = '2021002114615149';
+    const chInfo = 'ch_TTZSY__chsub_TTCJMRFL'; // 渠道信息，须替换 
+    const scheme = 'alipays://platformapi/startapp'; 
+    const orchardQueryStr = joinKeyValStr([{key: 'chInfo', val: chInfo}]);
+    const orchardScheme = scheme + '?' + joinKeyValStr([ { key: 'appId', val: orchardAppId, },{ key: 'query', val: orchardQueryStr, } ]); // 外部跳转 
+    const urlStr = 'https://render.alipay.com/p/s/i/?scheme=' + encodeURIComponent(orchardScheme);
+    console.log(urlStr);
+  </script>
+</body>
+
+</html>
