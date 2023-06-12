@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/transform.css">
+  <title>transform</title>
+</head>
+
+<body>
+  <!-- https://wiki.jirengu.com/doku.php?id=css3d_%E7%9B%92%E5%AD%90 -->
+  <div class="container">
+    <div class="normal translate"></div>
+  </div>
+
+  <div class="container" style="perspective: 400px;">
+    <!-- <div class="normal" style="transform: rotateY(45deg);"></div> -->
+    <div class="normal" style="transform: translateZ(-800px);"></div>
+  </div>
+
+  <div class="container">
+    <div class="normal" style="transform: perspective(400px) rotateY(90deg);"></div>
+  </div>
+  <br />
+
+  <!-- 卡片翻转 -->
+  <div class="scene" style="margin-bottom: 50px;">
+    <div class="card">
+      <div class="card__face card__face--front">front</div>
+      <div class="card__face card__face--back">back</div>
+    </div>
+  </div>
+
+  <!-- 正方体 -->
+  <div class="scene" style="height: 200px;">
+    <div class="cube">
+      <div class="cube__face cube__face--front" style="background: hsla(  0, 100%, 50%, 0.7);">front</div>
+      <div class="cube__face cube__face--back" style="background: hsla(120, 100%, 50%, 0.7);">back</div>
+      <div class="cube__face cube__face--right" style="background: hsla( 60, 100%, 50%, 0.7);">right</div>
+      <div class="cube__face cube__face--left" style="background: hsla(180, 100%, 50%, 0.7);">left</div>
+      <div class="cube__face cube__face--top" style="background: hsla(240, 100%, 50%, 0.7);">top</div>
+      <div class="cube__face cube__face--bottom" style="background: hsla(300, 100%, 50%, 0.7);">bottom</div>
+    </div>
+  </div>
+  <p class="radio-group">
+    <label>
+      <input type="radio" name="rotate-cube-side" value="front" checked /> front
+    </label>
+    <label>
+      <input type="radio" name="rotate-cube-side" value="right" /> right
+    </label>
+    <label>
+      <input type="radio" name="rotate-cube-side" value="back" /> back
+    </label>
+    <label>
+      <input type="radio" name="rotate-cube-side" value="left" /> left
+    </label>
+    <label>
+      <input type="radio" name="rotate-cube-side" value="top" /> top
+    </label>
+    <label>
+      <input type="radio" name="rotate-cube-side" value="bottom" /> bottom
+    </label>
+  </p>
+
+
+  <script src="./utils/transform.js"></script>
+
+</body>
+
+</html>
