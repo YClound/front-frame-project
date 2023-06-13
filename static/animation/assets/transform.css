@@ -36,12 +36,12 @@
 }
 
 .scene {
+  display: inline-block;
   width: 200px;
   height: 260px;
   perspective: 600px;
-  text-align: center;
-  line-height: 200px;
   font-size: 36px;
+  position: relative;
 }
 
 /* 卡片翻转 */
@@ -63,6 +63,9 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card__face--front {
@@ -112,6 +115,9 @@
   width: 100%;
   height: 100%;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cube__face--front {
@@ -136,4 +142,198 @@
 
 .cube__face--bottom {
   transform: rotateX(-90deg) translateZ(100px);
+}
+
+
+/* 盒子 */
+.box {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  position: relative;
+  transition: transform 1s;
+  transform: translateZ(-50px);
+}
+
+.box__face {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box__face--front,
+.box__face--back {
+  width: 300px;
+  height: 200px;
+}
+
+.box__face--top,
+.box__face--bottom {
+  width: 300px;
+  height: 100px;
+  top: 50px;
+}
+
+.box__face--left,
+.box__face--right {
+  width: 100px;
+  height: 200px;
+  left: 100px;
+}
+
+.box__face--front {
+  transform: rotateY(0) translateZ(50px);
+}
+
+.box__face--back {
+  transform: rotateY(180deg) translateZ(50px);
+}
+
+.box__face--top {
+  transform: rotateX(90deg) translateZ(100px);
+}
+
+.box__face--bottom {
+  transform: rotateX(-90deg) translateZ(100px);
+}
+
+.box__face--left {
+  transform: rotateY(-90deg) translateZ(150px);
+}
+
+.box__face--right {
+  transform: rotateY(90deg) translateZ(150px);
+}
+
+.box.show-front {
+  transform: translateZ(-50px) rotateY(0deg);
+}
+
+.box.show-back {
+  transform: translateZ(-50px) rotateY(-180deg);
+}
+
+.box.show-right {
+  transform: translateZ(-150px) rotateY(-90deg);
+}
+
+.box.show-left {
+  transform: translateZ(-150px) rotateY(90deg);
+}
+
+.box.show-top {
+  transform: translateZ(-100px) rotateX(-90deg);
+}
+
+.box.show-bottom {
+  transform: translateZ(-100px) rotateX(90deg);
+}
+
+
+
+/** Math.round( ( cellWidth / 2 ) /  Math.tan( Math.PI / cellNumber ) ) **/
+.carousel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateZ(-288px);
+  transition: transform 1s;
+}
+
+/** backface-visibility: hidden; **/
+.carousel__cell {
+  width: 190px;
+  height: 120px;
+  font-size: 80px;
+  font-weight: bold;
+  line-height: 120px;
+  text-align: center;
+  color: #fff;
+  left: 10px;
+  top: 10px;
+  border: 2px solid black;
+  position: absolute;
+  transition: transform 1s, opacity 1s;
+}
+
+.carousel__cell:nth-child(9n+1) {
+  background: hsla(0, 100%, 50%, 0.8);
+}
+
+.carousel__cell:nth-child(9n+2) {
+  background: hsla(40, 100%, 50%, 0.8);
+}
+
+.carousel__cell:nth-child(9n+3) {
+  background: hsla(80, 100%, 50%, 0.8);
+}
+
+.carousel__cell:nth-child(9n+4) {
+  background: hsla(120, 100%, 50%, 0.8);
+}
+
+.carousel__cell:nth-child(9n+5) {
+  background: hsla(160, 100%, 50%, 0.8);
+}
+
+.carousel__cell:nth-child(9n+6) {
+  background: hsla(200, 100%, 50%, 0.8);
+}
+
+.carousel__cell:nth-child(9n+7) {
+  background: hsla(240, 100%, 50%, 0.8);
+}
+
+.carousel__cell:nth-child(9n+8) {
+  background: hsla(280, 100%, 50%, 0.8);
+}
+
+.carousel__cell:nth-child(9n+0) {
+  background: hsla(320, 100%, 50%, 0.8);
+}
+
+.carousel__cell:nth-child(1) {
+  transform: rotateY(0) translateZ(288px);
+}
+
+.carousel__cell:nth-child(2) {
+  transform: rotateY(40deg) translateZ(288px);
+}
+
+.carousel__cell:nth-child(3) {
+  transform: rotateY(80deg) translateZ(288px);
+}
+
+.carousel__cell:nth-child(4) {
+  transform: rotateY(120deg) translateZ(288px);
+}
+
+.carousel__cell:nth-child(5) {
+  transform: rotateY(160deg) translateZ(288px);
+}
+
+.carousel__cell:nth-child(6) {
+  transform: rotateY(200deg) translateZ(288px);
+}
+
+.carousel__cell:nth-child(7) {
+  transform: rotateY(240deg) translateZ(288px);
+}
+
+.carousel__cell:nth-child(8) {
+  transform: rotateY(280deg) translateZ(288px);
+}
+
+.carousel__cell:nth-child(9) {
+  transform: rotateY(320deg) translateZ(288px);
+}
+
+.carousel-options {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

@@ -26,7 +26,7 @@
   <br />
 
   <!-- 卡片翻转 -->
-  <div class="scene" style="margin-bottom: 50px;">
+  <div class="scene" style="margin-right: 50px;">
     <div class="card">
       <div class="card__face card__face--front">front</div>
       <div class="card__face card__face--back">back</div>
@@ -34,7 +34,7 @@
   </div>
 
   <!-- 正方体 -->
-  <div class="scene" style="height: 200px;">
+  <div class="scene" style="height: 200px;margin-right: 50px;">
     <div class="cube">
       <div class="cube__face cube__face--front" style="background: hsla(  0, 100%, 50%, 0.7);">front</div>
       <div class="cube__face cube__face--back" style="background: hsla(120, 100%, 50%, 0.7);">back</div>
@@ -44,6 +44,19 @@
       <div class="cube__face cube__face--bottom" style="background: hsla(300, 100%, 50%, 0.7);">bottom</div>
     </div>
   </div>
+
+  <!-- 盒子 -->
+  <div class="scene" style="height: 200px; width: 300px;" style="margin-right: 50px;">
+    <div class="box">
+      <div class="box__face box__face--front" style="background: hsla(  0, 100%, 50%, 0.7);">front</div>
+      <div class="box__face box__face--back" style="background: hsla(120, 100%, 50%, 0.7);">back</div>
+      <div class="box__face box__face--right" style="background: hsla( 60, 100%, 50%, 0.7);">right</div>
+      <div class="box__face box__face--left" style="background: hsla(180, 100%, 50%, 0.7);">left</div>
+      <div class="box__face box__face--top" style="background: hsla(240, 100%, 50%, 0.7);">top</div>
+      <div class="box__face box__face--bottom" style="background: hsla(300, 100%, 50%, 0.7);">bottom</div>
+    </div>
+  </div>
+
   <p class="radio-group">
     <label>
       <input type="radio" name="rotate-cube-side" value="front" checked /> front
@@ -64,6 +77,50 @@
       <input type="radio" name="rotate-cube-side" value="bottom" /> bottom
     </label>
   </p>
+
+  <div class="scene" style="width: 210px; height: 140px; perspective: 1000px;border: 1px solid #CCC;margin: 120px auto;display: block;">
+    <div class="carousel">
+      <div class="carousel__cell">1</div>
+      <div class="carousel__cell">2</div>
+      <div class="carousel__cell">3</div>
+      <div class="carousel__cell">4</div>
+      <div class="carousel__cell">5</div>
+      <div class="carousel__cell">6</div>
+      <div class="carousel__cell">7</div>
+      <div class="carousel__cell">8</div>
+      <div class="carousel__cell">9</div>
+      <div class="carousel__cell">10</div>
+      <div class="carousel__cell">11</div>
+      <div class="carousel__cell">12</div>
+      <div class="carousel__cell">13</div>
+      <div class="carousel__cell">14</div>
+      <div class="carousel__cell">15</div>
+    </div>
+  </div>
+
+  <div class="carousel-options">
+    <p>
+      <label>
+        Cells
+        <input class="cells-range" type="range" min="3" max="15" value="9" />
+      </label>
+    </p>
+    <p>
+      <button class="previous-button">Previous</button>
+      <button class="next-button">Next</button>
+    </p>
+    <p>
+      Orientation:
+      <label>
+        <input type="radio" name="orientation" value="horizontal" checked />
+        horizontal
+      </label>
+      <label>
+        <input type="radio" name="orientation" value="vertical" />
+        vertical
+      </label>
+    </p>
+  </div>
 
 
   <script src="./utils/transform.js"></script>
