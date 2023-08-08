@@ -1,0 +1,85 @@
+<?xml version="1.0" standalone="no"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- 原型 -->
+  <!-- <circle cx="50" cy="150" r="50" stroke="black" stroke-width="4" fill="red" /> -->
+
+  <!-- 椭圆 -->
+  <!-- <ellipse cx="250" cy="150" rx="50" ry="20" fill="green" /> -->
+
+  <!-- 直线 -->
+  <!-- <line x1="0" y1="0" x2="50"  y2="100" stroke="black" stroke-linecap="square" stroke-width="5"/> -->
+
+  <!-- 多边形 -->
+  <!-- <polygon points="10,10 100,20 100,50 20,50" stroke="black" stroke-width="2" fill="#999" /> -->
+
+  <!-- 折线 -->
+  <!-- <polyline points="0,0 0,10 10,10 10,50, 50,50" stroke="red" stroke-width="2" fill="#fff" /> -->
+
+  <!-- 路径 -->
+  <!-- <path d="M250 150 L150 350 L350 350 Z" /> -->
+
+  <!-- 波浪 -->
+  <!-- <path id="svg_1" d="m0,236 c130.88876,-72.44158 168.2264,82.35563 290.00002,0l0,162.31006c-119.82639,-0.26552 -154.06249,0.26553 -290.00002,0l0,-162.31006z" fill="#007fff"/> -->
+
+  <!-- 线 -->
+  <!-- <path d="m0 200 l288 0" stroke="black" stroke-width="5" stroke-linecap="round"/> -->
+
+  <!-- 二次贝塞尔曲线 Q x1 y1, x y 或者 q x1 y1, x y -->
+  <!-- 参数：x、y为终点位置，x1、y1为控制点。 -->
+  <!-- <path d="M190 100 Q280 50 370 100 v100 h-360 v-100" stroke="red" stroke-width="2" fill="none" /> -->
+
+  <!-- smooth 二次贝塞尔曲线 T x y 或者 t x y -->
+  <!-- x、y为终点位置。 -->
+  <!-- <path d="M10 100 Q 100 150 190 100 T400 200" fill="none" stroke="red" stroke-width="2"/> -->
+
+  <!-- 三次贝塞尔曲线 C x1 y1, x2 y2, x y 或者 c x1 y1, x2 y2, x y-->
+  <!-- 参数：x、y为终点位置，x1、y1为曲线起始点的控制点，x2、y2为曲线终止的控制点。 -->
+  <!-- <path d="M50 50 C100 100, 150 0, 200 50" /> -->
+
+  <!-- smooth 三次贝塞尔曲线 S x2 y2, x y 或者 s x2 y2, x y-->
+  <!-- x、y为终点位置，x2、y2为曲线终止的控制点。 -->
+  <!-- <path d="M10 100 C50 10, 70 10, 110 100 S160 190, 200 100" /> -->
+
+  <!-- 画弧形 A rx ry x-axis-rotation large-arc-flag sweep-flag x y 或者 a rx ry x-axis-rotation large-arc-flag sweep-flag x y -->
+  <!-- <path d="M10 100 50 100 A40 50 0 1 1 150 100 L 200 100 V200 200 H10 Z" fill="red" stroke="red" stroke-width="5" stroke-linecap="round" /> -->
+
+  <!-- <defs>
+    <linearGradient id="textLinear" x1="0" y1="0" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="rgb(255,255, 0)" />
+      <stop offset="100%" stop-color="rgb(255,0,0)" />
+    </linearGradient>
+
+    <path id="pathQ" d="M50 100 Q 175 200 300 100 T 600 100" fill="none" />
+    <text x="0" y="0" id="text" stroke="#000" font-size="30" >今天天气不错！</text>
+  </defs> -->
+
+  <!-- <text x="10" y="50" font-size="50" fill="url(#textLinear)">
+    Hello Svg!
+  </text>
+   <text x="10 50 80" y="100 110 100" font-size="50" stroke="url(#textLinear)" fill="none" rotate="15">
+    Hello Svg!
+  </text> -->
+
+  <!-- svg属性增加 xmlns:xlink="http://www.w3.org/1999/xlink" 显示路径-->
+  <!-- <text>
+    <textPath xlink:href="#pathQ"> Welcome to the world of SVG ! Welcome to the world of SVG ! </textPath>
+  </text> -->
+  <!-- <use x="50" y="100" fill="#f00" xlink:href="#text" /> -->
+
+  <!-- <defs>
+    <clipPath id="clipPath">
+      <path d="M10 50 A50 50 0 0 1 100 50 A50 50 0 0 1 190 50 Q210 100 100 200  Q-5 100 10 50 Z" />
+    </clipPath>
+  </defs> -->
+  <!-- <rect x="0" y="0" width="200" height="200" fill="#f00" clip-path="url(#clipPath)"  /> -->
+
+  <defs>
+    <mask id="Mask">
+      <path d="M10 50 A50 50 0 0 1 100 50 A50 50 0 0 1 190 50 Q210 100 100 200  Q-5 100 10 50 Z" fill="#fff" fill-opacity="0.5" />
+    </mask>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" fill="#f00" mask="url(#Mask)" />
+</svg>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="288px" height="44px" viewBox="288 0 288 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="yes">
+  <style>
+    #path {
+      animation: ani 2s linear infinite;
+    }
+
+    @keyframes ani {
+      0% {
+        transform: translateX(0px);
+      }
+
+      100% {
+        transform: translateX(288px);
+      }
+    }
+  </style>
+  <path d="M0,1.10546875 C18.8871592,11.5976563 44.3272634,16.84375 77.3203125,16.84375 C126.809886,16.84375 137.325071,1.10546875 184.664062,1.10546875 C232.003054,1.10546875 237.825976,16.84375 283.96875,16.84375 C330.111524,16.84375 341.936331,1.10546875 391.71875,1.10546875 C441.501169,1.10546875 446.145341,16.84375 495.667969,16.84375 C528.683054,16.84375 555.793731,11.5976563 577,1.10546875 L577,123 L0,123 L0,1.10546875 Z" id="path" stroke="#261BE8" fill="#261BE8"></path>
+</svg>

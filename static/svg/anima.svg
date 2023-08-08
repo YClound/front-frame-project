@@ -1,0 +1,33 @@
+<svg class="editorial" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 15 150 40" preserveAspectRatio="yes">
+  <style>
+    .parallax>use {
+      animation: move-forever 10s linear infinite;
+    }
+
+    .parallax>use:nth-child(1) {
+      animation-delay: -2s;
+    }
+
+    .parallax>use:nth-child(2) {
+      animation-delay: -4s;
+      animation-duration: 4s;
+    }
+
+    @keyframes move-forever {
+      0% {
+        transform: translate(-90px, 0%);
+      }
+
+      100% {
+        transform: translate(85px, 0%);
+      }
+    }
+  </style>
+  <defs>
+    <path id="gentle-wave" d="M-160 44c30 0 58-8 88-8s 58 8 88 8 58-8 88-8 58 8 88 8 v44 h-352 z"></path>
+  </defs>
+  <g class="parallax">
+    <use xlink:href="#gentle-wave" x="50" y="0" fill="#89F1BA"></use>
+    <use xlink:href="#gentle-wave" x="50" y="4" fill="#2488ff"></use>
+  </g>
+</svg>
