@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>steps 逐帧动画</title>
+  <style>
+    .ani-steps {
+      width: 200px;
+      height: 150px;
+      background-image: url('./assets/steps.webp');
+      background-size: 100% auto;
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      animation: ani 5s steps(5, start) infinite backwards;
+      border: #333 1px solid;
+    }
+
+    @keyframes ani {
+      100% {
+        background-position: 0 -750px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ani-steps"></div>
+</body>
+</html>

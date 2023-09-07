@@ -26,3 +26,15 @@
 
 ## 容器查询
 * @container
+
+
+## text-orientation
+> 指定内容行中字符的方向。它仅适用于内容的垂直模式。此属性不影响水平书写模式的元素。mixed、sideways、upright、sideways-right 和 use-glyph-orientation
+
+## writing-mode
+> 定义了文本在水平或垂直方向上如何排布: horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr
+* horizontal-tb：水平方向自上而下的书写方式。即 left-right-top-bottom
+* vertical-rl：垂直方向自右而左的书写方式。即 top-bottom-right-left
+* vertical-lr：垂直方向内内容从上到下，水平方向从左到右
+* sideways-rl：内容垂直方向从上到下排列
+* sideways-lr：内容垂直方向从下到上排列

@@ -1,3 +1,5 @@
+// 执行栈 后进先出（LIFO）的结构
+
 function func() {
   if (true) {
     let t = 3;

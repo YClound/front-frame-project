@@ -8,17 +8,18 @@ var display = 2;
 var defaultBindings = function () {
   console.warn('--------默认绑定---------');
   console.warn('--------严格模式下 this题目1---------')
-  // 注意：开启了严格模式，只是使得函数内的this指向undefined，它并不会改变全局中this的指向
+  // 注意：开启了严格模式，只是使得<b>函数内</b>的this指向undefined，它并不会改变<b>全局中this的指向</b>
 
   function foo() {
     console.log('foo函数内部this: ', this);
     console.log('window.a: ', window.a);
-    // console.log('this.a: ', this.a);
+    console.log('this.a: ', this.a);
   }
+
   console.log('global this:', this);
   foo();
 
-  // 非严格模式下 如果把 var 改成了 let 或 const，变量是不会被绑定到window上的
+  // 非严格模式下 如果把 var 改成了 let 或 const(不存在变量提升)，变量是不会被绑定到window上的
   console.warn('--------非严格模式下 this题目2---------')
   let c = 10
   const b = 20
