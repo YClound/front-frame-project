@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>纯前端实现录屏并保存视频到本地</title>
+</head>
+
+<body>
+  <button>点击录制</button>
+
+  <script>
+    const button = document.querySelector('button');
+    button.addEventListener('click', async () => {
+      // 请求获取包含视频流的媒体许可，并将其存储在名为 stream 的变量中，以便后续使用。这个流可以用于在网页上显示屏幕共享或进行其他媒体处理操作
+      const stream = await navigator.mediaDevices.getDisplayMedia({
+        video: true
+      })
+
+      // MediaRecorder 是一个 Web API，用于在浏览器中进行媒体录制，主要用于录制音频和视频
+      // 通过这种方式来查看当前浏览器是否支持该类型,如下代码所示:
+      const mime = MediaRecorder.isTypeSupported('video/webm;codecs=h264') ? 'video/webm;codecs=h264' : 'video/webm';
+
+      // new 关键字实例化 MediaRecorder 对象
+      const mediaRecorder = new MediaRecorder(stream, { mimeType: mime });
+
+      // 我们可以通过监听它的事件来进行不同的操作
+      const chunks = [];
+
+      // dataavailable 事件的监听器。当 MediaRecorder 有可用的音频/视频数据块时，它会触发此事件。在这里，每当数据可用时，将数据块（e.data）添加到 chunks 数组中。这是为了在录制完成后将这些数据块合并成一个完整的媒体文件。
+      mediaRecorder.addEventListener('dataavailable', function (e) {
+        chunks.push(e.data)
+      })
+
+      // stop 事件的监听器。当录制停止时，MediaRecorder 会触发此事件
+      mediaRecorder.addEventListener('stop', () => {
+        // 使用 Blob 构造函数将 chunks 数组中的数据块合并成一个二进制对象（Blob 对象）。chunks[0].type 用于指定 Blob 的媒体类型，通常是 WebM
+        const blob = new Blob(chunks, { type: chunks[0].type });
+
+        // 使用 URL.createObjectURL 方法将 Blob 对象转换为一个临时 URL。这个 URL 可以用于创建下载链接。通过这个 url 传递给新创建的 a 元素用于下载功能。
+        const url = URL.createObjectURL(blob);
+
+        // console.log(url)
+
+        // 通过模拟点击超链接来触发下载操作。用户将看到一个下载对话框，允许他们保存录制的媒体文件
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'video.webm';
+        a.click();
+      })
+
+      mediaRecorder.start();
+    })
+  </script>
+</body>
+
+</html>
