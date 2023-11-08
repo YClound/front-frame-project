@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- https://mp.weixin.qq.com/s/f26P9wO1YrGIXBVjv4V3lQ -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原生的视图转换动画 View Transitions API</title>
+
+  <style>
+    ::view-transition-new(root),
+    ::view-transition-old(root) {
+      animation-duration: 2s;
+    }
+
+    #list {
+      display: flex;
+      width: 460px;
+      flex-wrap: wrap;
+    }
+
+    #list .item {
+      width: 100px;
+      height: 100px;
+      border-radius: 4px;
+      background-color: royalblue;
+      margin: 0 20px 20px 0;
+      color: #fff;
+      font-size: 24px;
+      text-align: center;
+      line-height: 100px;
+    }
+
+    #list .item:nth-child(4n) {
+      margin-right: 0;
+    }
+
+    #list .item {
+      view-transition-name: var(--i);
+    }
+
+    button {
+      background-color: royalblue;
+      width: 100px;
+      height: 46px;
+      color: #fff;
+      font-size: 14px;
+      line-height: 46px;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+    }
+
+    #dialog {
+      width: 300px;
+      height: 300px;
+      view-transition-name: dialog;
+      text-align: center;
+    }
+
+    ::view-transition-old(dialog) {
+      display: none;
+      animation-duration: 0;
+    }
+
+    .dark {
+      color-scheme: dark;
+    }
+
+    ::view-transition-new(root) {
+      animation: clip 0.5s ease-in;
+      mix-blend-mode: normal;
+    }
+
+    @keyframes clip {
+      from {
+        clip-path: circle(0% at var(--x) var(--y));
+        ;
+      }
+
+      to {
+        clip-path: circle(100% at var(--x) var(--y));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="list" id="list">
+    <div class="item" style="--i: a1">1</div>
+    <div class="item" style="--i: a2">2</div>
+    <div class="item" style="--i: a3">3</div>
+    <div class="item" style="--i: a4">4</div>
+    <div class="item" style="--i: a5">5</div>
+    <div class="item" style="--i: a6">6</div>
+    <div class="item" style="--i: a7">7</div>
+    <div class="item" style="--i: a8">8</div>
+    <div class="item" style="--i: a9">9</div>
+    <div class="item" style="--i: a10">10</div>
+  </div>
+
+  <!-- 不同元素之间的过渡 -->
+  <div class="btn-group" id="group">
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+  </div>
+  <dialog id="dialog">
+    <form method="dialog">
+      <div>我是弹窗</div>
+      <button>关闭</button>
+    </form>
+  </dialog>
+
+  <br />
+
+  <!-- 自定义过渡动画 -->
+  <button id="changeButton">切换模式</button>
+</body>
+
+<script>
+  const list = document.getElementById('list');
+  list.addEventListener('click', function (ev) {
+    if (ev.target.className === 'item') {
+      // 兼容不支持的浏览器
+      if (document.startViewTransition) {
+        const transition = document.startViewTransition(() => {
+          // 开始转换视图
+          ev.target.remove();
+        })
+
+        transition.updateCallbackDone.then(() => {
+          console.log('视图更新成功')
+        })
+
+        transition.ready.then(() => {
+          console.log('过渡动画即将运行')
+        })
+
+        transition.finished.then(() => {
+          console.log('过渡动画即结束')
+        })
+
+      } else {
+        ev.target.remove();
+      }
+    }
+  })
+
+  const group = document.getElementById('group');
+  const dialog = document.getElementById('dialog');
+  group.addEventListener('click', (ev) => {
+    if (ev.target.tagName === 'BUTTON') {
+      ev.target.style.viewTransitionName = 'dialog';
+      if (document.startViewTransition) {
+        document.startViewTransition(() => {
+          ev.target.style.viewTransitionName = '';
+          dialog.showModal();
+        })
+      } else {
+        dialog.showModal();
+      }
+    }
+  })
+
+  const btn = document.getElementById('changeButton');
+  btn.addEventListener('click', function (ev) {
+    document.documentElement.style.setProperty('--x', ev.clientX + 'px')
+    document.documentElement.style.setProperty('--y', ev.clientY + 'px')
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        document.documentElement.classList.toggle('dark');
+      })
+    } else {
+      document.documentElement.classList.toggle('dark');
+    }
+  })
+</script>
+
+</html>
